@@ -18,7 +18,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
@@ -46,11 +53,11 @@ public class CourseServiceTest {
             partants.add(partant2);
             partants.add(partant3);
             Course course = new Course(1,"hasard", LocalDate.now(), partants);
-            Mockito.when(courseRepository.save(course)).thenReturn(course);
+            when(courseRepository.save(course)).thenReturn(course);
             //Mockito.when(courseServiceInterface.creationCourse(course)).thenReturn(course);
             Course savedCourse = courseService.creationCourse(course);
             //verfier la veracité des valeurs
-            Mockito.verify(courseRepository, Mockito.times(1)).save(course);
+            Mockito.verify(courseRepository, times(1)).save(course);
             Assertions.assertEquals(course, savedCourse);
         }
 
@@ -64,7 +71,7 @@ public class CourseServiceTest {
             Course course = new Course(1,"hasard", LocalDate.now(), partants);
 
             // Appel à la methode et verfier l'exception
-            Assertions.assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
+            assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
         }
 
         @Test
@@ -82,7 +89,59 @@ public class CourseServiceTest {
             partants.add(partant4);
             Course course = new Course(1,"Partant 1", LocalDate.now(), partants);
             // Appel à la methode et verfier la levée d'une exception
-            Assertions.assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
+            assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
         }
+
+    @Test
+    @DisplayName("Test:Recuperer toutes les courses")
+    public void testRecupererToutesCourses() {
+
+        Course course1 = new Course(1,"Partant 1", LocalDate.now(), null);
+        Course course2 = new Course(2,"Partant 2", LocalDate.now(), null);
+        List<Course> courses = Arrays.asList(course1, course2);
+        when(courseRepository.findAll()).thenReturn(courses);
+        List<Course> result = courseService.recupererToutesCourses();
+        Assertions.assertEquals(courses, result);
+      }
+    @Test
+    @DisplayName("Test:Recuperer course par Id cas Ok")
+    public void testRecupererCourseParId_ExistingCourse() {
+
+        Course course = new Course(1,"Partant A", LocalDate.now(), null);
+        course.setId(1L);
+        Optional<Course> optionalCourse = Optional.of(course);
+        when(courseRepository.findById(1L)).thenReturn(optionalCourse);
+        Course result = courseService.recupererCourseParId(1L);
+        Assertions.assertEquals(course, result);
     }
+
+    @Test
+    @DisplayName("Test:Recuperer course par Id cas KO")
+    public void testRecupererCourseParId_NonExistingCourse() {
+
+        Optional<Course> optionalCourse = Optional.empty();
+        when(courseRepository.findById(1L)).thenReturn(optionalCourse);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+            courseService.recupererCourseParId(1L);
+        });
+        Assertions.assertEquals("400 BAD_REQUEST \"Aucune course avec ce numero n'a été trouvé\"", exception.getMessage());
+      }
+
+    @Test
+    @DisplayName("Test : suppression OK avec course")
+    public void testSupprimerCourse_ExistingCourse() {
+        courseService.supprimerCourse(1L);
+        Mockito.verify(courseRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    @DisplayName("Test : Mise a jour de course")
+    public void testMiseAjourCourse() {
+        Course course = new Course(1,"Partant B", LocalDate.now(), null);
+        course.setId(1L);
+        when(courseRepository.save(course)).thenReturn(course);
+        Course result = courseService.miseAjourCourse(course);
+        Assertions.assertEquals(course, result);
+    }
+}
 
