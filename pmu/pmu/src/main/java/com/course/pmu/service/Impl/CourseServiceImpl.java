@@ -5,7 +5,6 @@ import com.course.pmu.entity.Partant;
 import com.course.pmu.repository.CourseRepository;
 import com.course.pmu.repository.CourseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

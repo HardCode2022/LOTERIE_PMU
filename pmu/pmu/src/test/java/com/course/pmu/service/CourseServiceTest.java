@@ -3,7 +3,6 @@ package com.course.pmu.service;
 import com.course.pmu.entity.Course;
 import com.course.pmu.entity.Partant;
 import com.course.pmu.repository.CourseRepository;
-import com.course.pmu.repository.CourseServiceInterface;
 import com.course.pmu.service.Impl.CourseServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -2,8 +2,10 @@ package com.course.pmu.controller;
 
 import com.course.pmu.entity.Course;
 import com.course.pmu.service.CourseService;
-import io.swagger.annotations.*;
-import org.springframework.dao.DataIntegrityViolationException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;

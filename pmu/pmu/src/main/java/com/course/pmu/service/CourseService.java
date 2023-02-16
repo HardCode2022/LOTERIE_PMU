@@ -5,7 +5,7 @@ import com.course.pmu.repository.CourseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Service pour la persistence des données , utilisant JPA repository
