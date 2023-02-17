@@ -36,6 +36,7 @@ public class CourseServiceImpl implements CourseServiceInterface {
             if (!numPartants.add(partant.getNumero())) {
                 throw new IllegalArgumentException("Les numéros de partant doivent être uniques.");
             }
+             partant.setCourse(course); // Ajout de cette ligne pour lier les entités Course et Partant
         }
         course.setPartants(course.getPartants().stream().sorted(Comparator.comparingInt(Partant::getNumero)).collect(Collectors.toList()));
         return courseRepository.save(course);
