@@ -14,6 +14,7 @@ public class Partant {
     private String nom;
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JsonIgnore
     private Course course;
 
     public Partant() {
