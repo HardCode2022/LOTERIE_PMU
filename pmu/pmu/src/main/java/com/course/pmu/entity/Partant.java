@@ -1,5 +1,6 @@
 package com.course.pmu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 /**
@@ -14,6 +15,7 @@ public class Partant {
     private String nom;
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JsonIgnore
     private Course course;
 
     public Partant() {

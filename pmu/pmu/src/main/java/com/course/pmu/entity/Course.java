@@ -2,6 +2,7 @@ package com.course.pmu.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Entity Course sur la bse de JPA repo
  */
 @Entity
-public class Course {
+public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -70,6 +71,23 @@ public class Course {
         this.partants = partants;
     }
 
+    public void addPartant(Partant partant) {
+        if (partant == null) {
+            throw new IllegalArgumentException("Partant ne doit pas être null");
+        }
+
+        if (partants == null) {
+            partants = new ArrayList<>();
+        }
+
+        partants.add(partant);
+        partant.setCourse(this);
+    }
+
+    public void removePartant(Partant partant) {
+        partants.remove(partant);
+        partant.setCourse(null);
+    }
     @Override
     public String toString() {
         return "Course{" +
