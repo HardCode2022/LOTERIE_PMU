@@ -65,6 +65,10 @@ public class CourseServiceImpl implements CourseServiceInterface {
 
     @Override
     public Course miseAjourCourse(Course course) throws  RuntimeException {
+        for (Partant partant : course.getPartants()) {
+            partant.setCourse(course); // Ajout de cette ligne pour lier les entités Course et Partant
+        }
+        course.setPartants(course.getPartants().stream().sorted(Comparator.comparingInt(Partant::getNumero)).collect(Collectors.toList()));
         return courseRepository.save(course);
     }
 }

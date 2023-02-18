@@ -114,6 +114,7 @@ public class CourseRessource {
             @ApiResponse(code = 500, message = "Internal server error")
     })
     public ResponseEntity<Course> miseAjourCourse(@PathVariable Long id, @RequestBody Course course) throws  RuntimeException {
-        return new ResponseEntity<>(courseService.mettreAjourCourse(course), HttpStatus.OK);
+        Course updatedCourse = courseService.mettreAjourCourse(course);
+        return ResponseEntity.ok(updatedCourse);
     }
 }

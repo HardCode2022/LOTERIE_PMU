@@ -137,7 +137,16 @@ public class CourseServiceTest {
     @Test
     @DisplayName("Test : Mise a jour de course")
     public void testMiseAjourCourse() {
-        Course course = new Course(1,"Partant B", LocalDate.now(), null);
+        Partant partant1 = new Partant(1,"Partant 1", null);
+        Partant partant2 = new Partant(2,"Partant 2", null);
+        Partant partant3 = new Partant(3,"Partant 3", null);
+        Partant partant4 = new Partant(1,"Partant 4", null);
+        List<Partant> partants = new ArrayList<>();
+        partants.add(partant1);
+        partants.add(partant2);
+        partants.add(partant3);
+        partants.add(partant4);
+        Course course = new Course(1,"Partant B", LocalDate.now(), partants);
         course.setId(1L);
         when(courseRepository.save(course)).thenReturn(course);
         Course result = courseService.miseAjourCourse(course);
