@@ -53,7 +53,6 @@ public class CourseControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(course)))
                 .andExpect(status().isCreated());
-
         verify(courseService).creerCourse(any(Course.class));
         verify(kafkaTemplate).send("course_created", course);
     }

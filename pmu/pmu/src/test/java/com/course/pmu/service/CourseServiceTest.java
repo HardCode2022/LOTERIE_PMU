@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -32,10 +31,8 @@ public class CourseServiceTest {
 
         @Mock
         private CourseRepository courseRepository;
-
         @InjectMocks
         private CourseServiceImpl courseService;
-
         @BeforeEach
         public void setup() {
             MockitoAnnotations.openMocks(this);
@@ -63,7 +60,7 @@ public class CourseServiceTest {
 
         @Test
         @DisplayName("Test : Verfier la levée d'une exception avec 1 partant")
-        public void testCreationCourseWithLessThanThreePartants() {
+        public void testCreationCourseAvec1partant() {
             // Mock de données
             Partant partant1 = new Partant(1,"Partant 1", null);
             List<Partant> partants = new ArrayList<>();
