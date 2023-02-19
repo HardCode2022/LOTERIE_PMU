@@ -12,7 +12,7 @@ public class CourseCreatedListener {
     @Autowired
     private CourseRepository courseRepository;
 
-    @KafkaListener(topics = "course_Created")
+    @KafkaListener(topics = "course_pmu")
     public void onCourseCreated(Course course) {
         courseRepository.save(course);
     }

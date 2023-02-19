@@ -54,6 +54,6 @@ public class CourseControllerTest {
                         .content(objectMapper.writeValueAsString(course)))
                 .andExpect(status().isCreated());
         verify(courseService).creerCourse(any(Course.class));
-        verify(kafkaTemplate).send("course_created", course);
+        verify(kafkaTemplate).send("course_pmu", course);
     }
 }

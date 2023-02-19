@@ -53,7 +53,7 @@ public class CourseRessource {
      * @param savegardeCourse savegardeCourse
      */
     private void envoyerNouvelleCourse(Course savegardeCourse) throws  RuntimeException{
-        kafkaTemplate.send("course_created", savegardeCourse);
+        kafkaTemplate.send("course_pmu", savegardeCourse);
     }
 
     @GetMapping("/getcourses")

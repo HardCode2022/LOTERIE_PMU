@@ -98,4 +98,28 @@ public class Course implements Serializable {
                 ", partants=" + partants +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Course course = (Course) o;
+
+        if (numero != course.numero) return false;
+        if (id != null ? !id.equals(course.id) : course.id != null) return false;
+        if (nom != null ? !nom.equals(course.nom) : course.nom != null) return false;
+        if (date != null ? !date.equals(course.date) : course.date != null) return false;
+        return partants != null ? partants.equals(course.partants) : course.partants == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + numero;
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (partants != null ? partants.hashCode() : 0);
+        return result;
+    }
 }
