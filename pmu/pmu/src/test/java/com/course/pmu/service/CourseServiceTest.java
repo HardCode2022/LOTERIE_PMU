@@ -41,15 +41,15 @@ public class CourseServiceTest {
         @Test
         @DisplayName("Test : creation d'une course")
         public void testCreationCourse() throws Exception {
-            Partant partant1 = new Partant(1,"Partant 1", null);
-            Partant partant2 = new Partant(2,"Partant 2", null);
-            Partant partant3 = new Partant(3,"Partant 3", null);
+            Partant partant1 = new Partant(1L, 1,"Partant 1",null);
+            Partant partant2 = new Partant(2L, 2,"Partant 2",null);
+            Partant partant3 = new Partant(3L,3,"Partant 3", null);
             //initier liste de partants
             List<Partant> partants = new ArrayList<>();
             partants.add(partant1);
             partants.add(partant2);
             partants.add(partant3);
-            Course course = new Course(1,"hasard", LocalDate.now(), partants);
+            Course course = new Course(1L,1,"hasard", LocalDate.now(), partants);
             when(courseRepository.save(course)).thenReturn(course);
             //Mockito.when(courseServiceInterface.creationCourse(course)).thenReturn(course);
             Course savedCourse = courseService.creationCourse(course);
@@ -62,11 +62,10 @@ public class CourseServiceTest {
         @DisplayName("Test : Verfier la levée d'une exception avec 1 partant")
         public void testCreationCourseAvec1partant() {
             // Mock de données
-            Partant partant1 = new Partant(1,"Partant 1", null);
+            Partant partant1 = new Partant(1L, 1,"Partant 1",null);
             List<Partant> partants = new ArrayList<>();
             partants.add(partant1);
-            Course course = new Course(1,"hasard", LocalDate.now(), partants);
-
+            Course course = new Course(1L,1,"hasard", LocalDate.now(), partants);
             // Appel à la methode et verfier l'exception
             assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
         }
@@ -75,16 +74,16 @@ public class CourseServiceTest {
         @DisplayName("Test: verifier la non duplication")
         public void testCreationCourseSansDuplication() {
             // Mock de données
-            Partant partant1 = new Partant(1,"Partant 1", null);
-            Partant partant2 = new Partant(2,"Partant 2", null);
-            Partant partant3 = new Partant(3,"Partant 3", null);
-            Partant partant4 = new Partant(1,"Partant 4", null);
+            Partant partant1 = new Partant(1L, 1,"Partant 1",null);
+            Partant partant2 = new Partant(1L,1,"Partant 2", null);
+            Partant partant3 = new Partant(3L,3,"Partant 3", null);
+            Partant partant4 = new Partant(4L,4,"Partant 4", null);
             List<Partant> partants = new ArrayList<>();
             partants.add(partant1);
             partants.add(partant2);
             partants.add(partant3);
             partants.add(partant4);
-            Course course = new Course(1,"Partant 1", LocalDate.now(), partants);
+            Course course = new Course(1L,1,"Partant 1", LocalDate.now(), partants);
             // Appel à la methode et verfier la levée d'une exception
             assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
         }
@@ -93,8 +92,8 @@ public class CourseServiceTest {
     @DisplayName("Test:Recuperer toutes les courses")
     public void testRecupererToutesCourses() {
 
-        Course course1 = new Course(1,"Partant 1", LocalDate.now(), null);
-        Course course2 = new Course(2,"Partant 2", LocalDate.now(), null);
+        Course course1 = new Course(1L,1,"Partant 1", LocalDate.now(), null);
+        Course course2 = new Course(2L,2,"Partant 2", LocalDate.now(), null);
         List<Course> courses = Arrays.asList(course1, course2);
         when(courseRepository.findAll()).thenReturn(courses);
         List<Course> result = courseService.recupererToutesCourses();
@@ -104,7 +103,7 @@ public class CourseServiceTest {
     @DisplayName("Test:Recuperer course par Id cas Ok")
     public void testRecupererCourseParId_ExistingCourse() {
 
-        Course course = new Course(1,"Partant A", LocalDate.now(), null);
+        Course course = new Course(1L,1,"Partant A", LocalDate.now(), null);
         course.setId(1L);
         Optional<Course> optionalCourse = Optional.of(course);
         when(courseRepository.findById(1L)).thenReturn(optionalCourse);
@@ -115,7 +114,6 @@ public class CourseServiceTest {
     @Test
     @DisplayName("Test:Recuperer course par Id cas KO")
     public void testRecupererCourseParId_NonExistingCourse() {
-
         Optional<Course> optionalCourse = Optional.empty();
         when(courseRepository.findById(1L)).thenReturn(optionalCourse);
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
@@ -134,16 +132,16 @@ public class CourseServiceTest {
     @Test
     @DisplayName("Test : Mise a jour de course")
     public void testMiseAjourCourse() {
-        Partant partant1 = new Partant(1,"Partant 1", null);
-        Partant partant2 = new Partant(2,"Partant 2", null);
-        Partant partant3 = new Partant(3,"Partant 3", null);
-        Partant partant4 = new Partant(1,"Partant 4", null);
+        Partant partant1 = new Partant(1L, 1,"Partant 1",null);
+        Partant partant2 = new Partant(2L,2,"Partant 2", null);
+        Partant partant3 = new Partant(3L,3,"Partant 3", null);
+        Partant partant4 = new Partant(4L,4,"Partant 4", null);
         List<Partant> partants = new ArrayList<>();
         partants.add(partant1);
         partants.add(partant2);
         partants.add(partant3);
         partants.add(partant4);
-        Course course = new Course(1,"Partant B", LocalDate.now(), partants);
+        Course course = new Course(1L,1,"Partant B", LocalDate.now(), partants);
         course.setId(1L);
         when(courseRepository.save(course)).thenReturn(course);
         Course result = courseService.miseAjourCourse(course);

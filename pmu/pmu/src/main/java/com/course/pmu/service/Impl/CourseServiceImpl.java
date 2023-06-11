@@ -4,6 +4,7 @@ import com.course.pmu.entity.Course;
 import com.course.pmu.entity.Partant;
 import com.course.pmu.repository.CourseRepository;
 import com.course.pmu.repository.CourseServiceInterface;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,7 +39,6 @@ public class CourseServiceImpl implements CourseServiceInterface {
             }
              partant.setCourse(course); // Ajout de cette ligne pour lier les entités Course et Partant
         }
-
         course.setPartants(course.getPartants().stream().sorted(Comparator.comparingInt(Partant::getNumero)).collect(Collectors.toList()));
         return courseRepository.save(course);
     }
