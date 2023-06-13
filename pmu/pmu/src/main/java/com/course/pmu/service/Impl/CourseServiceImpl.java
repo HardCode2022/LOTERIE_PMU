@@ -4,7 +4,6 @@ import com.course.pmu.entity.Course;
 import com.course.pmu.entity.Partant;
 import com.course.pmu.repository.CourseRepository;
 import com.course.pmu.repository.CourseServiceInterface;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

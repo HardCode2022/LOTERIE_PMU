@@ -1,4 +1,4 @@
-# TEST_PMU [PMU - Exercice technique.pdf](https://github.com/HardCode2022/TEST_PMU/files/10770548/PMU.-.Exercice.technique.pdf)
+# LOTERIE_PMU [PMU - Exercice technique.pdf](https://github.com/HardCode2022/TEST_PMU/files/10770548/PMU.-.Exercice.technique.pdf)
 #####################################################################REALISATION############################################
 Stack:
 -java 17

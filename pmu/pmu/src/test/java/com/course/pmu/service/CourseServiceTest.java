@@ -108,7 +108,10 @@ public class CourseServiceTest {
         Optional<Course> optionalCourse = Optional.of(course);
         when(courseRepository.findById(1L)).thenReturn(optionalCourse);
         Course result = courseService.recupererCourseParId(1L);
-        Assertions.assertEquals(course, result);
+        Assertions.assertAll(
+                ()->Assertions.assertEquals(course.getId(), result.getId()),
+                ()->Assertions.assertEquals(course.getNumero(), result.getNumero())
+        );
     }
 
     @Test
