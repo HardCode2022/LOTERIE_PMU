@@ -1,2 +1,2 @@
-# TEST_PMU
-Test Technique pour integrer les equipes de PMU à paris 
+# Loterie PMU
+Loterie de jeux Pmu
