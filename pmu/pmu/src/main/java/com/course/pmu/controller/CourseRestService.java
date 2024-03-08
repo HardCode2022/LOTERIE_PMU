@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -21,17 +22,19 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/api")
 @Api(value = "PMU API", tags = {"Mon API"}, description = "API pour la gestion des courses de PMU")
-public class CourseRessource {
+public class CourseRestService {
 
-    private static Logger LOGGER = Logger.getLogger(CourseRessource.class.getName());
+    private static Logger LOGGER = Logger.getLogger(CourseRestService.class.getName());
 
+    @Autowired
     private CourseService courseService;
 
+    @Autowired
     private KafkaTemplate<String, Course> kafkaTemplate;
 
-    public CourseRessource(CourseService courseService, KafkaTemplate<String, Course> kafkaTemplate) {
-        this.courseService = courseService;
-        this.kafkaTemplate = kafkaTemplate;
+    public CourseRestService(CourseService courseService, KafkaTemplate<String, Course> kafkaTemplate) {
+        this.courseService=courseService;
+        this.kafkaTemplate=kafkaTemplate;
     }
 
     @PostMapping("/createcourses")

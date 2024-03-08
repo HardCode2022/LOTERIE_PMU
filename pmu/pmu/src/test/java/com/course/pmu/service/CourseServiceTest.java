@@ -32,7 +32,7 @@ public class CourseServiceTest {
         @Mock
         private CourseRepository courseRepository;
         @InjectMocks
-        private CourseServiceImpl courseService;
+        private CourseService courseService;
         @BeforeEach
         public void setup() {
             MockitoAnnotations.openMocks(this);
@@ -52,7 +52,7 @@ public class CourseServiceTest {
             Course course = new Course(1L,1,"hasard", LocalDate.now(), partants);
             when(courseRepository.save(course)).thenReturn(course);
             //Mockito.when(courseServiceInterface.creationCourse(course)).thenReturn(course);
-            Course savedCourse = courseService.creationCourse(course);
+            Course savedCourse = courseService.creerCourse(course);
             //verfier la veracité des valeurs
             Mockito.verify(courseRepository, times(1)).save(course);
             Assertions.assertEquals(course, savedCourse);
@@ -67,7 +67,7 @@ public class CourseServiceTest {
             partants.add(partant1);
             Course course = new Course(1L,1,"hasard", LocalDate.now(), partants);
             // Appel à la methode et verfier l'exception
-            assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
+            assertThrows(ResponseStatusException.class, () -> courseService.creerCourse(course));
         }
 
         @Test
@@ -85,7 +85,7 @@ public class CourseServiceTest {
             partants.add(partant4);
             Course course = new Course(1L,1,"Partant 1", LocalDate.now(), partants);
             // Appel à la methode et verfier la levée d'une exception
-            assertThrows(ResponseStatusException.class, () -> courseService.creationCourse(course));
+            assertThrows(ResponseStatusException.class, () -> courseService.creerCourse(course));
         }
 
     @Test
@@ -96,7 +96,7 @@ public class CourseServiceTest {
         Course course2 = new Course(2L,2,"Partant 2", LocalDate.now(), null);
         List<Course> courses = Arrays.asList(course1, course2);
         when(courseRepository.findAll()).thenReturn(courses);
-        List<Course> result = courseService.recupererToutesCourses();
+        List<Course> result = courseService.recupererLesCourses();
         Assertions.assertEquals(courses, result);
       }
     @Test
@@ -107,7 +107,7 @@ public class CourseServiceTest {
         course.setId(1L);
         Optional<Course> optionalCourse = Optional.of(course);
         when(courseRepository.findById(1L)).thenReturn(optionalCourse);
-        Course result = courseService.recupererCourseParId(1L);
+        Course result = courseService.recupererCourseId(1L);
         Assertions.assertAll(
                 ()->Assertions.assertEquals(course.getId(), result.getId()),
                 ()->Assertions.assertEquals(course.getNumero(), result.getNumero())
@@ -120,7 +120,7 @@ public class CourseServiceTest {
         Optional<Course> optionalCourse = Optional.empty();
         when(courseRepository.findById(1L)).thenReturn(optionalCourse);
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
-            courseService.recupererCourseParId(1L);
+            courseService.recupererCourseId(1L);
         });
         Assertions.assertEquals("400 BAD_REQUEST \"Aucune course avec ce numero n'a été trouvé\"", exception.getMessage());
       }
@@ -128,14 +128,15 @@ public class CourseServiceTest {
     @Test
     @DisplayName("Test : suppression OK avec course")
     public void testSupprimerCourse_ExistingCourse() {
-        courseService.supprimerCourse(1L);
+        courseService.suppressionCourse(1L);
         Mockito.verify(courseRepository, times(1)).deleteById(1L);
     }
 
     @Test
     @DisplayName("Test : Mise a jour de course")
     public void testMiseAjourCourse() {
-        Partant partant1 = new Partant(1L, 1,"Partant 1",null);
+        Course course1 = new Course(1L,1,"Partant 1", LocalDate.now(), null);
+        Partant partant1 = new Partant(1L, 1,"Partant 1",course1);
         Partant partant2 = new Partant(2L,2,"Partant 2", null);
         Partant partant3 = new Partant(3L,3,"Partant 3", null);
         Partant partant4 = new Partant(4L,4,"Partant 4", null);
@@ -147,7 +148,7 @@ public class CourseServiceTest {
         Course course = new Course(1L,1,"Partant B", LocalDate.now(), partants);
         course.setId(1L);
         when(courseRepository.save(course)).thenReturn(course);
-        Course result = courseService.miseAjourCourse(course);
+        Course result = courseService.mettreAjourCourse(course);
         Assertions.assertEquals(course, result);
     }
 }

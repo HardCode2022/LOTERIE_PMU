@@ -33,11 +33,11 @@ public class CourseControllerTest {
     @Mock
     private KafkaTemplate<String, Course> kafkaTemplate;
 
-    private CourseRessource courseController;
+    private CourseRestService courseController;
 
     @BeforeEach
     public void setUp() {
-        courseController = new CourseRessource(courseService, kafkaTemplate);
+        courseController = new CourseRestService(courseService, kafkaTemplate);
         mockMvc = MockMvcBuilders.standaloneSetup(courseController).build();
         objectMapper  = new ObjectMapper();
     }

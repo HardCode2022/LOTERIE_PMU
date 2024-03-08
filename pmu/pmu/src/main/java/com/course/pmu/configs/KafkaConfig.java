@@ -1,7 +1,7 @@
 package com.course.pmu.configs;
 
 import com.course.pmu.entity.Course;
-import com.course.pmu.repository.CourseServiceInterface;
+import com.course.pmu.repository.CourseRepositoryCustom;
 import com.course.pmu.service.Impl.CourseServiceImpl;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -64,7 +64,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public CourseServiceInterface courseServiceInterface() {
+    public CourseRepositoryCustom courseServiceInterface() {
         return  new CourseServiceImpl();
     }
 }
