@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Entity Course sur la base de JPA repo
+ * Entity Course
  */
 @Entity
 @Setter

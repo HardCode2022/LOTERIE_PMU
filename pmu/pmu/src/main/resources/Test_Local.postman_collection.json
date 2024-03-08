@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "3b991204-a13e-4dcf-a4f9-9a823dc2905a",
+		"name": "Test_Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15378647"
+	},
+	"item": [
+		{
+			"name": "Api course PMU",
+			"item": [
+				{
+					"name": "Recuperer liste course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/getcourses",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getcourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperer course par id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/utilisateurs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"utilisateurs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sauvegarde course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"numero\":1,\r\n  \"nom\": \"Course de test 2\",\r\n  \"date\": \"2022-03-01\",\r\n  \"partants\": [\r\n    {\r\n      \"numero\":1,\r\n      \"nom\": \"Cheval 5\"\r\n    },\r\n    {\r\n     \"numero\":2,\r\n      \"nom\": \"Cheval 6\"\r\n    },\r\n    {\r\n     \"numero\":3,\r\n      \"nom\": \"Cheval 7\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/createcourses",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"createcourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer course par Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"numero\":2,\r\n  \"nom\": \"Course de test 2\",\r\n  \"date\": \"2022-03-01\",\r\n  \"partants\": [\r\n    {\r\n      \"numero\":2,\r\n      \"nom\": \"Cheval 5\"\r\n    },\r\n    {\r\n     \"numero\":3,\r\n      \"nom\": \"Cheval 6\"\r\n    },\r\n    {\r\n     \"numero\":4,\r\n      \"nom\": \"Cheval 7\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/courses/suppression/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"courses",
+								"suppression",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mise à jour course",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"numero\":2,\r\n  \"nom\": \"Course de test 2\",\r\n  \"date\": \"2022-03-01\",\r\n  \"partants\": [\r\n    {\r\n        \"id\": 4,\r\n      \"numero\":2,\r\n      \"nom\": \"Cheval de MAURICE\"\r\n    },\r\n    {\r\n        \"id\": 5,\r\n     \"numero\":3,\r\n      \"nom\": \"Cheval de SUIZI\"\r\n    },\r\n    {\r\n        \"id\": 6,\r\n     \"numero\":4,\r\n      \"nom\": \"Cheval de DEDE\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/course/miseAjour/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"course",
+								"miseAjour",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utilisateur",
+			"item": [
+				{
+					"name": "Recuperer liste utilsateurs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/utilisateurs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"utilisateurs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suppression utilisateur",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/utilisateur/suppression/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"utilisateur",
+								"suppression",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mise à jour utilisateur",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 6,\r\n        \"nom\": \"Corinne\",\r\n        \"age\": 30,\r\n        \"poste\": \"Consultante \",\r\n        \"competences\": \"ANGULAR\",\r\n        \"note\": \"6\",\r\n        \"image\": \"assets/images/Corinne.png\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/utilisateur/miseAjour/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"utilisateur",
+								"miseAjour",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sauvegarde utilisateur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nom\": \"GALILE\",\r\n        \"date\": 69,\r\n        \"poste\": \"Data\",\r\n        \"competences\": \"SAP\",\r\n        \"note\": \"6\",\r\n        \"image\": \"assets/images/GAL.png\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/courses/creation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"courses",
+								"creation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

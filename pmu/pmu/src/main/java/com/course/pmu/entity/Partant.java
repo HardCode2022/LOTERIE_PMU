@@ -8,7 +8,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Entity partant sur la base de JPA repo
+ * Entity partant
  */
 @Entity
 @Setter
